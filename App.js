@@ -1,45 +1,31 @@
 import React from "react";
 import ReactDOM from "react-dom";
 class App extends React.Component {
-    constructor(props){
-        super(props);
-        this.state = {
-            header: "this is header",
-            content: "this is the content"
-        }
-
-
-    }
 
     render() {
         return(
             <div>
-                <Header headerProp = {this.state.header}/>
-                <Content contentProp = {this.state.content}/>
+                <h3>Array: {this.props.propArray}</h3>
+                <h3>Bool: {this.props.propBool? "this is appearing because the bool is True..." : "this is appearing because the bool is False..."}</h3>
+                <h3>Number: {this.props.propNumber}</h3>
+                <h3>String: {this.props.propString}</h3>
             </div>
         );
     }
 }
 
-class Header extends React.Component {
-    render(){
-        return (
-            <div>
-                <h1>{this.props.headerProp}</h1>
-            </div>
+App.propTypes = {
+    propArray: React.PropTypes.array.isRequired,
+    propBool: React.PropTypes.bool.isRequired,
+    propNumber: React.PropTypes.number.isRequired,
+    propString: React.PropTypes.string.isRequired
+};
 
-        );
-    }
-}
-
-class Content extends React.Component {
-    render(){
-        return (
-            <div>
-                <h2>{this.props.contentProp}</h2>
-            </div>
-        );
-    }
-}
+App.defaultProps = {
+    propArray : [1, 2, 3, 4],
+    propBool: true,
+    propNumber: 12,
+    propString: "this is my String"
+};
 
 export default App
