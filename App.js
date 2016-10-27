@@ -1,36 +1,45 @@
 import React from "react";
 import ReactDOM from "react-dom";
 class App extends React.Component {
-    constructor(){
-        super();
-        this.update = this.update.bind(this);
-        this.state = {increasing: false};
-    }
-    update(){
-        ReactDOM.render(
-          <App val= {this.props.val+1}/>,
-            document.getElementById('app')
-        );
-    }
+    constructor(props){
+        super(props);
+        this.state = {
+            header: "this is header",
+            content: "this is the content"
+        }
 
-    componentWillReceiveProps(nextProps){
-        this.setState({increasing : nextProps.val > this.props.val});
-    }
 
-    shouldComponentUpdate(nextProps, nextState){
-        return nextProps.val % 5 === 0;
-    }
-
-    componentDidUpdate(prevProp, prevState){
-        console.log('prevProp', prevProp);
     }
 
     render() {
-        console.log(this.state.increasing);
-        return <button onClick={this.update}> {this.props.val} </button>
+        return(
+            <div>
+                <Header headerProp = {this.state.header}/>
+                <Content contentProp = {this.state.content}/>
+            </div>
+        );
     }
 }
 
-App.defaultProps = {val : 0};
+class Header extends React.Component {
+    render(){
+        return (
+            <div>
+                <h1>{this.props.headerProp}</h1>
+            </div>
+
+        );
+    }
+}
+
+class Content extends React.Component {
+    render(){
+        return (
+            <div>
+                <h2>{this.props.contentProp}</h2>
+            </div>
+        );
+    }
+}
 
 export default App
