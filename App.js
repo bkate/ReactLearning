@@ -15,10 +15,21 @@ class App extends React.Component {
      render() {
         return(
             <div>
-                <input type="text" value={this.state.data} onChange={this.setStateHandler}/>
-                <h4>{this.state.data}</h4>
+                <ChildComponent myDataProps={this.state.data} updateMyData ={this.setStateHandler}/>
             </div>
         );
+    }
+}
+
+class ChildComponent extends React.Component {
+    render(){
+        return (
+            <div>
+                <input type = "text" value = {this.props.myDataProps}
+                onChange = {this.props.updateMyData}/>
+                <h4>{this.props.myDataProps}</h4>
+            </div>
+        )
     }
 }
 
