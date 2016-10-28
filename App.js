@@ -4,59 +4,19 @@ class App extends React.Component {
     constructor(){
         super();
         this.state = {
-            data: 0
+            data: "initial input..."
         };
-        this.setNewNumber = this.setNewNumber.bind(this);
+        this.setStateHandler = this.setStateHandler.bind(this);
     };
-    setNewNumber(){
-        this.setState({data: this.state.data + 1})
+    setStateHandler(e){
+        this.setState({data: e.target.value});
     };
 
      render() {
         return(
             <div>
-                <button onClick={this.setNewNumber}>INCREMENT</button>
-                <Content myNumber = {this.state.data} />
-            </div>
-        );
-    }
-}
-
-class Content extends React.Component {
-
-    componentWillMount(){
-        console.log("Component Will Mount")
-    };
-
-    componentDidMount(){
-        console.log("Component Did Mount")
-    };
-
-    componentWillReceiveProps(newProps){
-        console.log(" component Will Recieve Props ")
-    }
-
-    shouldComponentUpdate(newProps, newState){
-        console.log(" should Component Update ");
-        return true;
-    }
-
-    componentWillUpdate(nextProps, nextState) {
-        console.log('Component WILL UPDATE!');
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        console.log('Component DID UPDATE!')
-    }
-
-    componentWillUnmount() {
-        console.log('Component WILL UNMOUNT!')
-    }
-
-    render() {
-        return (
-            <div>
-                <h3>{this.props.myNumber}</h3>
+                <input type="text" value={this.state.data} onChange={this.setStateHandler}/>
+                <h4>{this.state.data}</h4>
             </div>
         );
     }
