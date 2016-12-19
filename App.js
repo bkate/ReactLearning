@@ -1,36 +1,41 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+
 class App extends React.Component {
-    constructor(){
-        super();
+
+    constructor(props) {
+        super(props);
+
         this.state = {
-            data: "initial input..."
+            data: 'Initial data...'
         };
-        this.setStateHandler = this.setStateHandler.bind(this);
-    };
-    setStateHandler(e){
-        this.setState({data: e.target.value});
+
+        this.updateState = this.updateState.bind(this);
     };
 
-     render() {
-        return(
+    updateState() {
+        this.setState({data: 'Data updated from the child component...'})
+    }
+
+    render() {
+        return (
             <div>
-                <ChildComponent myDataProps={this.state.data} updateMyData ={this.setStateHandler}/>
+                <Content myDataProp = {this.state.data}
+                         updateStateProp = {this.updateState}/>
             </div>
         );
     }
 }
 
-class ChildComponent extends React.Component {
-    render(){
+class Content extends React.Component {
+
+    render() {
         return (
             <div>
-                <input type = "text" value = {this.props.myDataProps}
-                onChange = {this.props.updateMyData}/>
-                <h4>{this.props.myDataProps}</h4>
+                <button onClick = {this.props.updateStateProp}>CLICK</button>
+                <h3>{this.props.myDataProp}</h3>
             </div>
-        )
+        );
     }
 }
 
-export default App
+export default App;
