@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-// Refs are needed and useful in DOM measurements and if you want to add methods to your components
+// React keys are useful when working with dynamically created components or when your lists are altered by users.
+// Setting the key value will keep your components uniquely identified after the change.
 
 class App extends React.Component {
 
@@ -9,33 +10,45 @@ class App extends React.Component {
         super(props);
 
         this.state = {
-            data: ''
+            data: [
+                {
+                    component: 'First...',
+                    id: 1
+                },
+                {
+                    component: 'Second...',
+                    id: 2
+                },
+                {
+                    component: 'third...',
+                    id: 3
+                }
+            ]
         };
 
-        this.updateState = this.updateState.bind(this);
-        this.clearInput = this.clearInput.bind(this);
+
     };
-
-    updateState(e) {
-        this.setState({data: e.target.value})
-    }
-
-    clearInput() {
-        this.setState({data: ''});
-        ReactDOM.findDOMNode(this.refs.myInput).focus();
-    }
-
 
     render() {
         return (
             <div>
-                <input value = {this.state.data} onChange = {this.updateState}
-                ref = "myInput"/>
-                <button onClick = {this.clearInput}>CLEAR</button>
-                <h4>{this.state.data}</h4>
+                {this.state.data.map((dynamicComponent) => <Content
+                componentData = {dynamicComponent}/>)}
             </div>
         );
     }
+}
+
+class Content extends React.Component {
+    render(){
+        return(
+            <div>
+                <div>{this.props.componentData.component}</div>
+                <div>{this.props.componentData.id}</div>
+            </div>
+        )
+    }
+
 }
 
 
