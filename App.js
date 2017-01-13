@@ -1,23 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, Link, browserHistory, IndexRoute  } from 'react-router'
+import {connect} from 'react-redux';
 
+import {addTodo} from './actions/action.js'
 
 class App extends React.Component {
 
     render() {
         return (
-            <div>
-                <ul>
-                    <li>Home</li>
-                    <li>About</li>
-                    <li>Contact</li>
-                </ul>
-                {this.props.children}
-            </div>
-        );
-    }
+          <div>
+            <AddTodo
+              onAddClick = {text => dispatch(addTodo(text))} />
+            <TodoList todos = {visibleTodos} />
+          </div>
+    );
+  }
 }
-export default App;
 
+function select(state) {
+  return {
+    visibleTodos: state.todos
+  }
+}
 
+export default connect(select)(App);
